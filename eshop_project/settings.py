@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +26,7 @@ SECRET_KEY = 'django-insecure-9qts1=s)$ky8o%%_$_#j#dmb106oas2_-n6shcfp$yg2g@uxny
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "salah99.pythonanywhere.com"]
 
 # Application definition
 
@@ -88,7 +90,11 @@ WSGI_APPLICATION = 'eshop_project.wsgi.application'
 AUTH_USER_MODEL = 'account_module.User'
 LOGIN_URL = '/login'
 
-DATABASES = {}
+DATABASES = {
+    'default': dj_database_url.config(
+        default="sqlite:///" + os.path.join(BASE_DIR, "db.sqlite3")
+    )
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
